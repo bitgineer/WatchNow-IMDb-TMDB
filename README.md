@@ -63,6 +63,7 @@ IMDb Quick Watch is a Tampermonkey userscript that allows users to quickly redir
 ## 🖼️ Screenshots
 
 ![UI Screenshot](assets/screenshots/ui-screenshot.png)
+![UI2 Screenshot](assets/screenshots/ui2-screenshot.png)
 
 *The IMDb Quick Watch UI integrated into an IMDb title page.*
 
