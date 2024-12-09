@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         IMDb Quick Watch
+// @name         WatchNow IMDb TMDB
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Quickly redirect IMDb and TMDB titles to vidbinge.dev with custom settings.
@@ -17,8 +17,8 @@
 
     /*************** Styles Injection ***************/
     const styles = `
-    /* IMDb Quick Watch Styles */
-    #imdb-quick-watch-container {
+    /* WatchNow Styles */
+    #WatchNow-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
@@ -33,14 +33,14 @@
         box-sizing: border-box;
     }
 
-    #imdb-quick-watch-container h2 {
+    #WatchNow-container h2 {
         font-size: 1.4rem;
         margin-bottom: 20px;
         text-align: center;
         color: #6200ea;
     }
 
-    .iqw-button {
+    .wn-button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -57,38 +57,38 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
-    .iqw-button:hover {
+    .wn-button:hover {
         background-color: #3700b3;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .iqw-toggle-container {
+    .wn-toggle-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 15px;
     }
 
-    .iqw-toggle-label {
+    .wn-toggle-label {
         font-size: 1rem;
         flex: 1;
         margin-right: 10px;
     }
 
-    .iqw-toggle-switch {
+    .wn-toggle-switch {
         position: relative;
         width: 50px;
         height: 24px;
         flex-shrink: 0;
     }
 
-    .iqw-toggle-switch input {
+    .wn-toggle-switch input {
         opacity: 0;
         width: 0;
         height: 0;
     }
 
-    .iqw-slider {
+    .wn-slider {
         position: absolute;
         cursor: pointer;
         top: 0;
@@ -100,7 +100,7 @@
         border-radius: 24px;
     }
 
-    .iqw-slider:before {
+    .wn-slider:before {
         position: absolute;
         content: "";
         height: 18px;
@@ -112,37 +112,37 @@
         border-radius: 50%;
     }
 
-    .iqw-toggle-switch input:checked + .iqw-slider {
+    .wn-toggle-switch input:checked + .wn-slider {
         background-color: #6200ea;
     }
 
-    .iqw-toggle-switch input:checked + .iqw-slider:before {
+    .wn-toggle-switch input:checked + .wn-slider:before {
         transform: translateX(26px);
     }
 
-    .iqw-section {
+    .wn-section {
         margin-bottom: 15px;
         display: none;
     }
 
-    .iqw-section.active {
+    .wn-section.active {
         display: block;
     }
 
-    .iqw-section label {
+    .wn-section label {
         display: block;
         margin-bottom: 8px;
         font-size: 0.95rem;
     }
 
-    .iqw-radio-group {
+    .wn-radio-group {
         display: flex;
         justify-content: space-around;
         margin-bottom: 15px;
         flex-wrap: wrap;
     }
 
-    .iqw-radio-group label {
+    .wn-radio-group label {
         display: flex;
         align-items: center;
         font-size: 0.95rem;
@@ -151,22 +151,22 @@
         width: 45%;
     }
 
-    .iqw-radio-group input {
+    .wn-radio-group input {
         margin-right: 6px;
         flex-shrink: 0;
     }
 
-    .iqw-input-group {
+    .wn-input-group {
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
 
-    .iqw-input-group label {
+    .wn-input-group label {
         font-size: 0.95rem;
     }
 
-    .iqw-input-group input {
+    .wn-input-group input {
         padding: 8px 12px;
         font-size: 1rem;
         border: 1px solid #cccccc;
@@ -176,18 +176,18 @@
         width: 100%;
     }
 
-    .iqw-input-group input:focus {
+    .wn-input-group input:focus {
         border-color: #6200ea;
     }
 
-    .iqw-footer {
+    .wn-footer {
         font-size: 0.85rem;
         color: #777777;
         text-align: center;
     }
 
     /* Snackbar Styles */
-    #iqw-snackbar {
+    #wn-snackbar {
         position: fixed;
         bottom: 20px;
         left: 50%;
@@ -205,30 +205,30 @@
         pointer-events: none;
     }
 
-    #iqw-snackbar.show {
+    #wn-snackbar.show {
         opacity: 1;
         bottom: 30px;
     }
 
     /* Responsive Design */
     @media (max-width: 400px) {
-        #imdb-quick-watch-container {
+        #WatchNow-container {
             width: 90%;
             right: 5%;
             bottom: 10px;
             padding: 15px;
         }
 
-        #imdb-quick-watch-container h2 {
+        #WatchNow-container h2 {
             font-size: 1.2rem;
         }
 
-        .iqw-button {
+        .wn-button {
             font-size: 0.95rem;
             padding: 10px 12px;
         }
 
-        .iqw-toggle-label, .iqw-section label, .iqw-radio-group label, .iqw-input-group label {
+        .wn-toggle-label, .wn-section label, .wn-radio-group label, .wn-input-group label {
             font-size: 0.85rem;
         }
     }
@@ -238,58 +238,58 @@
 
     /*************** UI Injection ***************/
     const container = document.createElement('div');
-    container.id = 'imdb-quick-watch-container';
+    container.id = 'WatchNow-container';
     container.innerHTML = `
-        <h2>IMDb Quick Watch</h2>
+        <h2>WatchNow</h2>
 
-        <button id="iqw-redirectButton" class="iqw-button">
+        <button id="wn-redirectButton" class="wn-button">
             ▶️ Watch Now!
         </button>
 
-        <div class="iqw-toggle-container">
-            <span class="iqw-toggle-label">Enable Redirect</span>
-            <label class="iqw-toggle-switch">
-                <input type="checkbox" id="iqw-redirectCheckbox">
-                <span class="iqw-slider"></span>
+        <div class="wn-toggle-container">
+            <span class="wn-toggle-label">Enable Redirect</span>
+            <label class="wn-toggle-switch">
+                <input type="checkbox" id="wn-redirectCheckbox">
+                <span class="wn-slider"></span>
             </label>
         </div>
 
         <!-- Redirect Options Section -->
-        <div id="iqw-redirectOptions" class="iqw-section">
+        <div id="wn-redirectOptions" class="wn-section">
             <label>Open Redirect:</label>
-            <div class="iqw-radio-group">
+            <div class="wn-radio-group">
                 <label>
-                    <input type="radio" name="iqw-redirectTarget" value="same" id="iqw-redirectSame">
+                    <input type="radio" name="wn-redirectTarget" value="same" id="wn-redirectSame">
                     Same Tab
                 </label>
                 <label>
-                    <input type="radio" name="iqw-redirectTarget" value="new" id="iqw-redirectNew">
+                    <input type="radio" name="wn-redirectTarget" value="new" id="wn-redirectNew">
                     New Tab
                 </label>
             </div>
         </div>
 
         <!-- Season and Episode Inputs -->
-        <div id="iqw-seasonEpisodeOptions" class="iqw-section">
-            <div class="iqw-input-group">
-                <label for="iqw-seasonInput">Season:</label>
-                <input type="number" id="iqw-seasonInput" min="1" value="1">
+        <div id="wn-seasonEpisodeOptions" class="wn-section">
+            <div class="wn-input-group">
+                <label for="wn-seasonInput">Season:</label>
+                <input type="number" id="wn-seasonInput" min="1" value="1">
             </div>
-            <div class="iqw-input-group">
-                <label for="iqw-episodeInput">Episode:</label>
-                <input type="number" id="iqw-episodeInput" min="1" value="1">
+            <div class="wn-input-group">
+                <label for="wn-episodeInput">Episode:</label>
+                <input type="number" id="wn-episodeInput" min="1" value="1">
             </div>
         </div>
 
-        <div class="iqw-footer">
-            <p>Stream effortlessly with IMDb Quick Watch.</p>
+        <div class="wn-footer">
+            <p>Stream effortlessly with WatchNow.</p>
         </div>
     `;
     document.body.appendChild(container);
 
     // Snackbar Element
     const snackbar = document.createElement('div');
-    snackbar.id = 'iqw-snackbar';
+    snackbar.id = 'wn-snackbar';
     document.body.appendChild(snackbar);
 
     /*************** Utility Functions ***************/
@@ -304,8 +304,8 @@
 
     // Function to toggle visibility of sections
     function toggleSections(show) {
-        const redirectOptions = document.getElementById('iqw-redirectOptions');
-        const seasonEpisodeOptions = document.getElementById('iqw-seasonEpisodeOptions');
+        const redirectOptions = document.getElementById('wn-redirectOptions');
+        const seasonEpisodeOptions = document.getElementById('wn-seasonEpisodeOptions');
         if (show) {
             redirectOptions.classList.add('active');
             seasonEpisodeOptions.classList.add('active');
@@ -362,11 +362,11 @@
     let episode = GM_getValue('episode', 1);
 
     // Initialize UI with settings
-    const redirectCheckbox = document.getElementById('iqw-redirectCheckbox');
-    const redirectSame = document.getElementById('iqw-redirectSame');
-    const redirectNew = document.getElementById('iqw-redirectNew');
-    const seasonInput = document.getElementById('iqw-seasonInput');
-    const episodeInput = document.getElementById('iqw-episodeInput');
+    const redirectCheckbox = document.getElementById('wn-redirectCheckbox');
+    const redirectSame = document.getElementById('wn-redirectSame');
+    const redirectNew = document.getElementById('wn-redirectNew');
+    const seasonInput = document.getElementById('wn-seasonInput');
+    const episodeInput = document.getElementById('wn-episodeInput');
 
     redirectCheckbox.checked = redirectEnabled;
     toggleSections(redirectEnabled);
@@ -421,7 +421,7 @@
     });
 
     // Event listener for the redirect button
-    document.getElementById('iqw-redirectButton').addEventListener('click', function() {
+    document.getElementById('wn-redirectButton').addEventListener('click', function() {
         const url = window.location.href;
 
         // Check if URL is IMDb
