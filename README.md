@@ -1,110 +1,163 @@
+# WatchNow IMDb TMDB
 
-# IMDb Quick Watch
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub Repo Size](https://img.shields.io/github/repo-size/bitgineer/WatchNow-IMDb-TMDB.svg)
+![GitHub Issues](https://img.shields.io/github/issues/bitgineer/WatchNow-IMDb-TMDB.svg)
+![GitHub Stars](https://img.shields.io/github/stars/bitgineer/WatchNow-IMDb-TMDB.svg?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/bitgineer/WatchNow-IMDb-TMDB.svg?style=social)
+
+**WatchNow IMDb TMDB** is a powerful Tampermonkey script that enhances your streaming experience by allowing you to quickly redirect from IMDb and TMDB title pages to [vidbinge.dev](https://vidbinge.dev). With customizable settings, you can manage how and where the redirection occurs, ensuring a seamless and efficient way to watch your favorite movies and TV series.
 
 ![UI Screenshot](assets/screenshots/ui-screenshot.png)
 
-IMDb Quick Watch is a Tampermonkey userscript that allows users to quickly redirect IMDb and TMDB title pages to [vidbinge.dev](https://vidbinge.dev) with customizable settings such as redirect target (same tab or new tab) and specifying season and episode numbers for TV series.
+## Table of Contents
 
-## 🚀 Features
+- [WatchNow IMDb TMDB](#watchnow-imdb-tmdb)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Screenshots](#screenshots)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Support](#support)
 
-- **Easy Redirection**: Redirect IMDb and TMDB titles directly to vidbinge.dev.
-- **Customizable Settings**:
-  - **Redirect Target**: Choose to open the redirect in the same tab or a new tab.
-  - **Season & Episode**: Specify season and episode numbers for TV series.
-- **User-Friendly Interface**: Interactive UI integrated directly into IMDb and TMDB pages.
-- **Feedback Notifications**: Receive snackbar notifications for actions and errors.
+## Description
 
-## 📥 Installation
+**WatchNow IMDb TMDB** is designed to streamline your movie and TV series watching process by providing an easy-to-use interface directly on IMDb and TMDB title pages. Whether you're browsing through movies or diving into TV series, WatchNow ensures you can quickly access streaming options with just a few clicks.
+
+## Features
+
+- **Easy Installation**: Install the script via Tampermonkey with minimal effort.
+- **Custom Redirect Options**: Choose to open redirects in the same tab or a new tab.
+- **Season and Episode Selection**: For TV series, specify the desired season and episode numbers.
+- **User-Friendly Interface**: Intuitive UI with toggle switches and input fields.
+- **Snackbar Notifications**: Receive instant feedback on your actions.
+- **Responsive Design**: Compatible with various screen sizes for optimal viewing.
+
+## Installation
 
 ### Prerequisites
 
-- **Tampermonkey**: Ensure you have the [Tampermonkey](https://www.tampermonkey.net/) extension installed in your browser.
+- **Tampermonkey Extension**: Ensure you have the Tampermonkey extension installed in your browser.
+
+  - [Download Tampermonkey for Chrome](https://tampermonkey.net/?ext=dhdg&browser=chrome)
+  - [Download Tampermonkey for Firefox](https://tampermonkey.net/?ext=dhdg&browser=firefox)
+  - [Download Tampermonkey for Other Browsers](https://tampermonkey.net/)
 
 ### Steps
 
-1. **Clone the Repository**:
+1. **Clone the Repository**
 
    ```bash
    git clone https://github.com/bitgineer/WatchNow-IMDb-TMDB.git
    ```
 
-2. **Install the Userscript**:
+2. **Locate the Script**
 
-   - Open the `imdb-quick-watch.user.js`
-   - Tampermonkey should automatically detect the script. Click on the **Install** button in the Tampermonkey popup.
+   Navigate to the cloned repository and find the script file renamed to include "WatchNow":
 
-3. **Verify Installation**:
+   ```
+   WatchNow-IMDb-TMDB/
+   ├── assets/
+   │   └── screenshots/
+   │       ├── ui-screenshot.png
+   │       └── ui2-screenshot.png
+   └── WatchNow-IMDb&TMDB.user.js
+   ```
+
+3. **Install the Script in Tampermonkey**
+
+   - Open your browser and click on the Tampermonkey icon.
+   - Select **Dashboard**.
+   - Click on the **+** button to create a new script.
+   - Delete any existing template code in the editor.
+   - Open the `WatchNow-IMDb&TMDB.user.js` file from the cloned repository in a text editor.
+   - Copy the entire script content and paste it into the Tampermonkey editor.
+   - Click **File** > **Save** or press `Ctrl+S` (`Cmd+S` on Mac) to save the script.
+
+4. **Verify Installation**
 
    - Navigate to any IMDb or TMDB title page.
-   - The **IMDb Quick Watch** UI should appear at the bottom-right corner of the page.
+   - The **WatchNow** UI should appear, allowing you to customize your redirection settings.
 
-## 🛠️ Usage
+## Usage
 
-1. **Enable Redirect**:
+1. **Access the UI**
 
-   - Toggle the **Enable Redirect** switch to activate redirection settings.
+   On any IMDb or TMDB title page, the **WatchNow** interface will appear, typically at the bottom-right corner of the page.
 
-2. **Configure Redirect Options**:
+2. **Enable Redirect**
 
-   - **Open Redirect**:
-     - **Same Tab**: Redirects in the current tab.
-     - **New Tab**: Opens the redirect in a new browser tab.
-   - **Season & Episode**:
-     - Specify the desired season and episode numbers (applicable for TV series).
+   - Toggle the **Enable Redirect** switch to activate the redirection settings.
 
-3. **Initiate Redirection**:
+3. **Set Redirect Preferences**
+
+   - **Redirect Target**: Choose between opening the redirect in the same tab or a new tab.
+   - **Season and Episode**: If the title is a TV series, specify the desired season and episode numbers.
+
+4. **Initiate Redirect**
 
    - Click the **Watch Now!** button to perform the redirection based on your settings.
 
-4. **Feedback**:
+5. **Receive Feedback**
 
-   - Snackbar notifications will appear at the bottom of the screen to inform you about the status of your actions.
+   - Snackbar notifications will appear at the bottom of the screen to inform you about the status of your actions (e.g., successful redirection, errors).
 
-## 🖼️ Screenshots
+## Screenshots
 
 ![UI Screenshot](assets/screenshots/ui-screenshot.png)
-![UI2 Screenshot](assets/screenshots/ui2-screenshot.png)
 
-*The IMDb Quick Watch UI integrated into an IMDb title page.*
 
-## 🤝 Contributing
+![UI Screenshot 2](assets/screenshots/ui2-screenshot.png)
 
-Contributions are welcome! Please follow these steps to contribute:
+## Contributing
 
-1. **Fork the Repository**.
-2. **Create a Feature Branch**:
+Contributions are welcome! If you have suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
+
+### Steps to Contribute
+
+1. **Fork the Repository**
+
+   Click the **Fork** button at the top-right corner of this page to create a copy of the repository under your GitHub account.
+
+2. **Clone Your Fork**
 
    ```bash
-   git checkout -b feature/YourFeature
+   git clone https://github.com/your-username/WatchNow-IMDb-TMDB.git
    ```
 
-3. **Commit Your Changes**:
+3. **Create a New Branch**
+
+   ```bash
+   git checkout -b feature/YourFeatureName
+   ```
+
+4. **Make Your Changes**
+
+   Implement your feature or bug fix in the code.
+
+5. **Commit Your Changes**
 
    ```bash
    git commit -m "Add Your Feature"
    ```
 
-4. **Push to the Branch**:
+6. **Push to Your Fork**
 
    ```bash
-   git push origin feature/YourFeature
+   git push origin feature/YourFeatureName
    ```
 
-5. **Open a Pull Request**.
+7. **Create a Pull Request**
 
-## 📜 License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## 📧 Contact
-
-For any inquiries or feedback, please contact [bitgineer@use.startmail.com](mailto:bitgineer@use.startmail.com).
-
-## Reporting Issues
-
-If you encounter any issues or have suggestions, please open an [Issue](https://github.com/bitgineer/WatchNow-IMDb-TMDB/issues) with detailed information.
+   Navigate to the original repository and click **Compare & pull request** to submit your changes for review.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
+## Support
+
+If you encounter any issues or have questions, please open an [issue](https://github.com/bitgineer/WatchNow-IMDb-TMDB/issues) in the repository or contact the maintainer directly.
